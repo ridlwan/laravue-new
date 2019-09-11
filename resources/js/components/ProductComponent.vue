@@ -38,7 +38,39 @@
             <div class="input-group">
                 <input type="text" class="form-control" v-model="keyword" v-on:keyup="searchProduct">
             </div>
+            
             <br>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Price 100</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Price 200</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Price 300</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Amount 1000</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Amount 2000</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="">Amount 3000</label>
+                    </div>
+                </div>
+            </div>
+            <button @click.prevent="filter" class="btn btn-info">Filter</button>
+            <br>
+            <hr>
+            <br>
+            
             <form>
                 <div class="form-group">
                     <label>Name</label>

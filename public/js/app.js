@@ -1917,6 +1917,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41214,6 +41246,28 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-info",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.filter($event)
+            }
+          }
+        },
+        [_vm._v("Filter")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Name")]),
@@ -41392,7 +41446,60 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Price 100")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Price 200")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Price 300")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Amount 1000")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Amount 2000")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "checkbox" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "" } }),
+            _vm._v("Amount 3000")
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
