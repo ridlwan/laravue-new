@@ -41035,7 +41035,11 @@ var render = function() {
                   "li",
                   {
                     staticClass: "page-item",
-                    class: { disabled: _vm.pagination.first_link == "null" }
+                    class: {
+                      disabled:
+                        _vm.pagination.prev_link == "null" ||
+                        _vm.pagination.prev_link == "null" + _vm.params
+                    }
                   },
                   [
                     _c(
@@ -41140,7 +41144,11 @@ var render = function() {
                   "li",
                   {
                     staticClass: "page-item",
-                    class: { disabled: _vm.pagination.last_link == "null" }
+                    class: {
+                      disabled:
+                        _vm.pagination.next_link == "null" ||
+                        _vm.pagination.next_link == "null" + _vm.params
+                    }
                   },
                   [
                     _c(

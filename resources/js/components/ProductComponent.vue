@@ -20,11 +20,11 @@
                 <div class="col-md-8">
                     <nav>
                         <ul class="pagination">
-                            <li v-bind:class="{disabled: pagination.first_link == 'null'}" class="page-item"><a href="#" @click="viewProduct(pagination.first_link)" class="page-link">&laquo;</a></li>
+                            <li v-bind:class="{disabled: pagination.prev_link == 'null' || pagination.prev_link == 'null' + params}" class="page-item"><a href="#" @click="viewProduct(pagination.first_link)" class="page-link">&laquo;</a></li>
                             <li v-bind:class="{disabled: pagination.prev_link == 'null' || pagination.prev_link == 'null' + params}" class="page-item"><a href="#" @click="viewProduct(pagination.prev_link)" class="page-link">&lt;</a></li>
                             <li v-for="n in pagination.pagesArray" v-bind:key="n" v-bind:class="{active: pagination.current_page == n}" class="page-item"><a href="#" @click="viewProduct(pagination.path_page + n + params)" class="page-link">{{ n }}</a></li>
                             <li v-bind:class="{disabled: pagination.next_link == 'null' || pagination.next_link == 'null' + params}" class="page-item"><a href="#" @click="viewProduct(pagination.next_link)" class="page-link">&gt;</a></li>
-                            <li v-bind:class="{disabled: pagination.last_link == 'null'}" class="page-item"><a href="#" @click="viewProduct(pagination.last_link)" class="page-link">&raquo;</a></li>
+                            <li v-bind:class="{disabled: pagination.next_link == 'null' || pagination.next_link == 'null' + params}" class="page-item"><a href="#" @click="viewProduct(pagination.last_link)" class="page-link">&raquo;</a></li>
                         </ul>
                     </nav>
                 </div>
