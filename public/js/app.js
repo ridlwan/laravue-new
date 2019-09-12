@@ -1949,6 +1949,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1966,30 +1970,26 @@ __webpack_require__.r(__webpack_exports__);
       pagination: {},
       offset: 2,
       keyword: '',
-      search: false,
-      params: ''
+      params: '',
+      price: [],
+      amount: []
     };
   },
   created: function created() {
     this.viewProduct();
   },
   methods: {
-    searchProduct: function searchProduct() {
-      this.search = true;
-      this.viewProduct();
-    },
     viewProduct: function viewProduct(paginate) {
       var _this = this;
 
-      if (this.search == true) {
-        paginate = paginate || 'api/products?q=' + this.keyword;
-        this.params = '&q=' + this.keyword;
-      } else {
-        paginate = paginate || 'api/products';
-        this.params = '';
-      }
-
-      axios.get(paginate).then(function (response) {
+      paginate = paginate || 'api/products';
+      axios.get(paginate, {
+        params: {
+          keyword: this.keyword,
+          price: this.price,
+          amount: this.amount
+        }
+      }).then(function (response) {
         _this.products = response.data.data;
 
         if (!response.data.meta.to) {
@@ -41015,7 +41015,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-6" }, [
-                  _vm._v("Stock " + _vm._s(product.number))
+                  _vm._v("Stock " + _vm._s(product.amount))
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6 text-right" }, [
@@ -41233,7 +41233,9 @@ var render = function() {
           attrs: { type: "text" },
           domProps: { value: _vm.keyword },
           on: {
-            keyup: _vm.searchProduct,
+            keyup: function($event) {
+              return _vm.viewProduct()
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -41246,7 +41248,269 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.price,
+                    expression: "price"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "100" },
+                domProps: {
+                  checked: Array.isArray(_vm.price)
+                    ? _vm._i(_vm.price, "100") > -1
+                    : _vm.price
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.price,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "100",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.price = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.price = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.price = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Price 100")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.price,
+                    expression: "price"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "200" },
+                domProps: {
+                  checked: Array.isArray(_vm.price)
+                    ? _vm._i(_vm.price, "200") > -1
+                    : _vm.price
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.price,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "200",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.price = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.price = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.price = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Price 200")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.price,
+                    expression: "price"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "300" },
+                domProps: {
+                  checked: Array.isArray(_vm.price)
+                    ? _vm._i(_vm.price, "300") > -1
+                    : _vm.price
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.price,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "300",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.price = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.price = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.price = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Price 300")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.amount,
+                    expression: "amount"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "1000" },
+                domProps: {
+                  checked: Array.isArray(_vm.amount)
+                    ? _vm._i(_vm.amount, "1000") > -1
+                    : _vm.amount
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.amount,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "1000",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.amount = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.amount = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.amount = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Amount 1000")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.amount,
+                    expression: "amount"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "2000" },
+                domProps: {
+                  checked: Array.isArray(_vm.amount)
+                    ? _vm._i(_vm.amount, "2000") > -1
+                    : _vm.amount
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.amount,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "2000",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.amount = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.amount = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.amount = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Amount 2000")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "checkbox" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.amount,
+                    expression: "amount"
+                  }
+                ],
+                attrs: { type: "checkbox", value: "3000" },
+                domProps: {
+                  checked: Array.isArray(_vm.amount)
+                    ? _vm._i(_vm.amount, "3000") > -1
+                    : _vm.amount
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.amount,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = "3000",
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.amount = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.amount = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.amount = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v("Amount 3000")
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -41255,12 +41519,20 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              return _vm.filter($event)
+              return _vm.viewProduct()
             }
           }
         },
         [_vm._v("Filter")]
       ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("Price : " + _vm._s(_vm.price))]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("Amount : " + _vm._s(_vm.amount))]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -41446,60 +41718,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Price 100")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Price 200")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Price 300")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Amount 1000")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Amount 2000")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox", value: "" } }),
-            _vm._v("Amount 3000")
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

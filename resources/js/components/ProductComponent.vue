@@ -6,7 +6,7 @@
                     <h4>{{ product.name }}</h4>
                     <p>{{ product.description }}</p>
                     <div class="row">
-                        <div class="col-md-6">Stock {{ product.number }}</div>
+                        <div class="col-md-6">Stock {{ product.amount }}</div>
                         <div class="col-md-6 text-right">Rp {{ product.price }}</div>
                         <p>
                             <button @click="editProduct(product)" class="btn btn-warning">Edit</button>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-4">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="keyword" v-on:keyup="searchProduct">
+                <input type="text" class="form-control" v-model="keyword" v-on:keyup="viewProduct()">
             </div>
             
             <br>
@@ -44,29 +44,33 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Price 100</label>
+                        <label><input type="checkbox" v-model="price" value="100">Price 100</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Price 200</label>
+                        <label><input type="checkbox" v-model="price" value="200">Price 200</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Price 300</label>
+                        <label><input type="checkbox" v-model="price" value="300">Price 300</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Amount 1000</label>
+                        <label><input type="checkbox" v-model="amount" value="1000">Amount 1000</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Amount 2000</label>
+                        <label><input type="checkbox" v-model="amount" value="2000">Amount 2000</label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" value="">Amount 3000</label>
+                        <label><input type="checkbox" v-model="amount" value="3000">Amount 3000</label>
                     </div>
                 </div>
             </div>
-            <button @click.prevent="filter" class="btn btn-info">Filter</button>
+            <button @click.prevent="viewProduct()" class="btn btn-info">Filter</button>
+            <br>
+            <span>Price : {{ price }}</span>
+            <br>
+            <span>Amount : {{ amount }}</span>
             <br>
             <hr>
             <br>
@@ -108,7 +112,7 @@
     }
 </style>
 
-
+checkedNames: []
 <script>
     export default{
         data(){
@@ -127,28 +131,25 @@
                 pagination: {},
                 offset: 2,
                 keyword: '',
-                search: false,
-                params: ''
+                params: '',
+                price: [],
+                amount: [],
             }
         },
         created(){
             this.viewProduct();
         },
         methods: {
-            searchProduct(){
-                this.search = true;
-                this.viewProduct();
-            },            
             viewProduct(paginate){
-                if (this.search == true) {
-                    paginate = paginate || 'api/products?q=' + this.keyword;
-                    this.params = '&q=' + this.keyword;
-                } else {
-                    paginate = paginate || 'api/products';
-                    this.params = '';
-                }
+                paginate = paginate || 'api/products';
                     
-                axios.get(paginate)
+                axios.get(paginate, {
+                    params: {
+                        keyword: this.keyword,
+                        price: this.price,
+                        amount: this.amount,
+                    }
+                })
                 .then(response => {
                     this.products = response.data.data;
 

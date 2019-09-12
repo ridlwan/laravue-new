@@ -9,13 +9,25 @@ use App\Http\Resources\Product as ProductResource;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->get('q')) {
-            return ProductResource::collection(Product::where('name', 'like', '%' . request()->get('q') . '%')->orderBy('created_at', 'desc')->paginate(1));
-        }
+        $products = new Product();
 
-        return ProductResource::collection(Product::orderBy('created_at', 'desc')->paginate(1));
+        if ($request->keyword) {
+            $products = $products->orWhere('name', 'like', '%' . $request->keyword . '%');
+        }
+        
+        if ($request->price) {
+            $products = $products->whereIn('price', $request->price);
+        } 
+        
+        if ($request->amount) {
+            $products = $products->whereIn('amount', $request->amount);
+        } 
+
+        $products = $products->orderBy('created_at', 'desc')->paginate(1);
+
+        return ProductResource::collection($products);
     }
 
     public function store(Request $request)
