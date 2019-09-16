@@ -2,6 +2,45 @@
     <div class="row">
         <div class="col-md-8">
             <div class="row">
+                <multiselect v-model="selectedCountries" id="ajax" label="name" track-by="id" placeholder="Type to search" open-direction="bottom" :options="countries" :multiple="false" :searchable="true" :loading="isLoading" :internal-search="false" :clear-on-select="false" :close-on-select="true" :options-limit="300" :limit="3" :limit-text="limitText" :max-height="600" :show-no-results="false" :hide-selected="true" @search-change="asyncFind" @select="productSelected"></multiselect>
+
+                <pre class="language-json">
+                    <code>{{ product_selected }}</code>
+                </pre>
+
+                <br>
+
+                <form action="/submit" method="POST">
+                    <input type="hidden" name="_token" :value="csrf">
+                    
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody v-for="(product, index) in product_selected">
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.price }}</td>
+                                <td><input :name=product.varname type="number" min="1" :value="1"></td>
+                                <td><button @click="removeProductSelected(index)"> X </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                    <button type="submit">ok</button>
+                </form>
+
+            </div>
+            <button @click="clearAllSearch()" class="btn btn-danger">Clear</button>
+            <br>
+            <br>
+            <br>
+            <div class="row">
                 <div v-for="product in products" class="card card-body mb-2 mr-2 product-item">
                     <h4>{{ product.name }}</h4>
                     <p>{{ product.description }}</p>
@@ -33,6 +72,8 @@
                     Total: {{ pagination.total_page }}
                 </div>
             </div>
+
+            <multiselect v-model="value" :options="options"></multiselect>
         </div>
         <div class="col-md-4">
             <div class="input-group">
@@ -112,7 +153,7 @@
     }
 </style>
 
-checkedNames: []
+
 <script>
     export default{
         data(){
@@ -134,6 +175,20 @@ checkedNames: []
                 params: '',
                 price: [],
                 amount: [],
+
+
+                value: null,
+                options: ['list', 'of', 'options'],
+
+
+                selectedCountries: [],
+                countries: [],
+                isLoading: false,
+
+
+                product_selected: [],
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+
             }
         },
         created(){
@@ -292,6 +347,36 @@ checkedNames: []
                 this.product.description = '';
                 this.product.price = '';
                 this.product.amount = '';
+            },
+
+
+
+            limitText(count) {
+                return `and ${count} other countries`;
+            },
+            asyncFind(keyword) {
+                this.isLoading = true;
+                
+                axios.get('api/products', {
+                    params: {
+                        keyword: keyword,
+                    }
+                })
+                .then(response => {
+                    this.countries = response.data.data;
+                    this.isLoading = false;
+                })
+            },
+            clearAllSearch() {
+                this.product_selected = [];
+            },
+            productSelected(selectedOption){
+                console.log('selectedOption',selectedOption)
+                // selectedOption.varname=product.id+"sss"
+                this.product_selected.push(selectedOption);
+            },
+            removeProductSelected(index){
+                this.product_selected.splice(index, 1); 
             }
         }
     }

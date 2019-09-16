@@ -25,7 +25,7 @@ class ProductController extends Controller
             $products = $products->whereIn('amount', $request->amount);
         } 
 
-        $products = $products->orderBy('created_at', 'desc')->paginate(1);
+        $products = $products->orderBy('created_at', 'desc')->paginate(4);
 
         return ProductResource::collection($products);
     }
@@ -41,6 +41,11 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
         return new ProductResource($product);
+    }
+    
+    public function submit(Request $request)
+    {
+        return $request->amount;
     }
 
     public function show($id)

@@ -7,8 +7,13 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.swal = require('sweetalert2');
 window.axios = require('axios');
+window.swal = require('sweetalert2');
+window.multiselect = require('vue-multiselect');
+
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
+import "vue-multiselect/dist/vue-multiselect.min.css"
 
 /**
  * The following block of code may be used to automatically register your
