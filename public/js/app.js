@@ -2210,8 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
       this.product_selected = [];
     },
     productSelected: function productSelected(selectedOption) {
-      console.log('selectedOption', selectedOption); // selectedOption.varname=product.id+"sss"
-
+      console.log('selectedOption', selectedOption);
       this.product_selected.push(selectedOption);
     },
     removeProductSelected: function removeProductSelected(index) {
@@ -41166,7 +41165,7 @@ var render = function() {
                         _c("td", [
                           _c("input", {
                             attrs: {
-                              name: product.varname,
+                              name: "amount[" + product.id + "]",
                               type: "number",
                               min: "1"
                             },

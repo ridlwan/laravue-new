@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.price }}</td>
-                                <td><input :name=product.varname type="number" min="1" :value="1"></td>
+                                <td><input :name="'amount[' + product.id + ']'" type="number" min="1" :value="1"></td>
                                 <td><button @click="removeProductSelected(index)"> X </button></td>
                             </tr>
                         </tbody>
@@ -372,7 +372,6 @@
             },
             productSelected(selectedOption){
                 console.log('selectedOption',selectedOption)
-                // selectedOption.varname=product.id+"sss"
                 this.product_selected.push(selectedOption);
             },
             removeProductSelected(index){
